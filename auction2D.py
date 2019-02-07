@@ -42,18 +42,18 @@ numberAuctionItems = int(input("How many items are in the Auction?"))
 
 while counter < numberAuctionItems:
     #create item array
-    itemCode = "i"+"0"+str(counter)
-    itemCode = []
+    
+    itemArray = []
     #input the individual item details
     itemNumber = counter
     itemDescription = input("Please input the description :")
     itemReserve = float(input("Please input the item Reserve Price :"))
     itemBids = 0
-    itemCode.append('{:0>3}'.format(counter))
-    itemCode.append(itemDescription)
-    itemCode.append(itemReserve)
-    itemCode.append(itemBids)
+    itemArray.append('{:0>3}'.format(counter))
+    itemArray.append(itemDescription)
+    itemArray.append(itemReserve)
+    itemArray.append(itemBids)
     #append the individual item to the 2D array
-    auctionItems.append(itemCode)
+    auctionItems.append(itemArray)
     print(auctionItems)
     counter+=1

@@ -37,7 +37,9 @@ Using the results from Task 2, identify items that have reached their reserve pr
 # e.g. auctionItems = [[itemNumber,"Description",reservePrice,noBids],[itemNumber,"Description",reservePrice,noBids]]
 
 auctionItems =[]
+bidderDetails = []
 counter = 0
+bidderCounter = 0
 numberAuctionItems = int(input("How many items are in the Auction?"))
 
 while counter < numberAuctionItems:
@@ -46,10 +48,10 @@ while counter < numberAuctionItems:
     itemArray = []
     #input the individual item details
     itemNumber = counter
-    itemDescription = input("Please input the description :")
+    itemDescription = input("Please input the description of item number:" + ('{:0>3}'.format(counter + 1)) + "")
     itemReserve = float(input("Please input the item Reserve Price :"))
     itemBids = 0
-    itemArray.append('{:0>3}'.format(counter))
+    itemArray.append('{:0>3}'.format(counter + 1))
     itemArray.append(itemDescription)
     itemArray.append(itemReserve)
     itemArray.append(itemBids)
@@ -57,3 +59,17 @@ while counter < numberAuctionItems:
     auctionItems.append(itemArray)
     print(auctionItems)
     counter+=1
+
+#Task 2
+#I intend to use a 2D array to store the bidder details
+numberOfBidders = int(input("How many bidders are at the auction today?"))
+while bidderCounter < numberOfBidders:
+    bidderArray = []
+    bidderName = input("Please enter the name of bidder number "  + ('{:0>3}'.format(bidderCounter + 1)))
+    bidderArray.append('{:0>3}'.format(bidderCounter + 1))
+    bidderArray.append(bidderName)
+    #append the individual bidder details to the 2D array
+    bidderDetails.append(bidderArray)
+    print(bidderDetails)
+    bidderCounter +=1
+

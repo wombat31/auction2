@@ -35,12 +35,15 @@ Using the results from Task 2, identify items that have reached their reserve pr
 #DECLARE VARIABLES
 #I intend to use a 2D array to store items
 # e.g. auctionItems = [[itemNumber,"Description",reservePrice,noBids],[itemNumber,"Description",reservePrice,noBids]]
+#Extending the array for task 2, the highest bid and bidder details will also be appended along with the auction item descriptions
+# e.g. auctionsItems = [[itemNumber, "Description", reservePrice, noBids, currentBid,[bidderDetails]]......[etc]]
 
 auctionItems =[]
 bidderDetails = []
 counter = 0
 bidderCounter = 0
 numberAuctionItems = int(input("How many items are in the Auction?"))
+auctionRunning = True
 
 while counter < numberAuctionItems:
     #create item array
@@ -51,10 +54,12 @@ while counter < numberAuctionItems:
     itemDescription = input("Please input the description of item number:" + ('{:0>3}'.format(counter + 1)) + "")
     itemReserve = float(input("Please input the item Reserve Price :"))
     itemBids = 0
+    currentBid = 0 #added for task 2
     itemArray.append('{:0>3}'.format(counter + 1))
     itemArray.append(itemDescription)
     itemArray.append(itemReserve)
     itemArray.append(itemBids)
+    itemArray.append(currentBid) #added for task 2
     #append the individual item to the 2D array
     auctionItems.append(itemArray)
     print(auctionItems)
@@ -73,3 +78,19 @@ while bidderCounter < numberOfBidders:
     print(bidderDetails)
     bidderCounter +=1
 
+#print out auction items and details
+print("IT IS TIME TO COMMENCE THE AUCTION")
+#print out the auction items.
+print("Today we are delighted to offer for sale")
+for i in range(len(auctionItems)):
+    print(auctionItems[i])
+
+while auctionRunning:
+    toBidOn = int(input("Which item number would you like to bid on?"))
+    print("How much would you like to bid for the" , auctionItems[toBidOn-1][1] , "? ")
+    print("The current highest bid is :$",auctionItems[toBidOn-1][4])
+    bid = float(input("How much would you like to bid?"))
+    if bid > auctionItems[toBidOn-1][4]:
+        auctionItems[toBidOn-1][4] = bid
+    else:
+        print("Your bid must be higher than the current highest bid")

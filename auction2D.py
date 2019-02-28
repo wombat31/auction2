@@ -86,11 +86,20 @@ for i in range(len(auctionItems)):
     print(auctionItems[i])
 
 while auctionRunning:
+    
     toBidOn = int(input("Which item number would you like to bid on?"))
+   
     print("How much would you like to bid for the" , auctionItems[toBidOn-1][1] , "? ")
     print("The current highest bid is :$",auctionItems[toBidOn-1][4])
     bid = float(input("How much would you like to bid?"))
     if bid > auctionItems[toBidOn-1][4]:
+        tempBidID = int(input(print("Your bid is acceptable, what is your bidder identification number? : ")))
         auctionItems[toBidOn-1][4] = bid
+        #Append all bidder details to auctionItems ie. [001,"Charles"]
+        if len(auctionItems)== 4:
+            auctionItems.append(bidderDetails[tempBidID-1])
+        else:
+            auctionItems.append(bidderDetails[tempBidID-1])
+
     else:
         print("Your bid must be higher than the current highest bid")

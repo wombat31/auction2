@@ -100,6 +100,9 @@ while auctionRunning:
         auctionItems[toBidOn-1][4] = bid
         #Append all bidder details to auctionItems ie. [001,"Charles"]
         #THIS PART DEALS WITH FIRST ASSIGNMENT OF BIDDER DETAILS TO AUCTIONITEMSARRAY
+        #It tests the length of the auction Items array
+        #If it is 5 in length, it means a bid has not been placed on the item 
+        #as it does not have an appended bidder within auctionItems
         if len(auctionItems[toBidOn-1]) == 5:
             auctionItems[toBidOn-1].append(bidderDetails[tempBidID-1])
             #No of bids is stored in the 3rd index of the auctionItems array.
@@ -109,6 +112,8 @@ while auctionRunning:
 
             print("DELETE ME:The current number of bids is after first assignment", auctionItems[toBidOn-1][3])
         #THIS PART DEALS WITH SECOND AND FURTHER ASSIGNMENTS OF BIDDER DETAILS TO AUCTIONITEMSARRAY
+        #i.e. if a bidder is already appended to auctionItems, it will replace the bidder should the bid
+        #be higher
         else:
             print("Im in the swap part")
             auctionItems[toBidOn-1][5] = (bidderDetails[tempBidID-1])

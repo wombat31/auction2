@@ -85,45 +85,76 @@ print("Today we are delighted to offer for sale")
 for i in range(len(auctionItems)):
     print(auctionItems[i])
 
+print("TO END THE AUCTION AT ANY TIME - TYPE (-1)")
+
 while auctionRunning:
+    
     print(auctionItems)
     #Print out the auction items
+
     toBidOn = int(input("Which item number would you like to bid on?"))
-    #Question which item to bid on
-    print("How much would you like to bid for the" , auctionItems[toBidOn-1][1] , "? ")
-    print("The current highest bid is :$",auctionItems[toBidOn-1][4])
-    bid = float(input("How much would you like to bid?"))
-    #Test if new bid is greater than the current bid
-    if bid > auctionItems[toBidOn-1][4]:
-        #if the bid is greater than the current bid accept bid and swap the current bid value.
-        tempBidID = int(input(print("Your bid is acceptable, what is your bidder identification number?")))
-        auctionItems[toBidOn-1][4] = bid
-        #Append all bidder details to auctionItems ie. [001,"Charles"]
-        #THIS PART DEALS WITH FIRST ASSIGNMENT OF BIDDER DETAILS TO AUCTIONITEMSARRAY
-        #It tests the length of the auction Items array
-        #If it is 5 in length, it means a bid has not been placed on the item 
-        #as it does not have an appended bidder within auctionItems
-        if len(auctionItems[toBidOn-1]) == 5:
-            auctionItems[toBidOn-1].append(bidderDetails[tempBidID-1])
-            #No of bids is stored in the 3rd index of the auctionItems array.
-            print("DELETE ME:The current number of bids is before first assignment", auctionItems[toBidOn-1][3])
-        
-            auctionItems[toBidOn-1][3] += 1
+    if toBidOn != -1:
+        #Question which item to bid on
+        print("How much would you like to bid for the" , auctionItems[toBidOn-1][1] , "? ")
+        print("The current highest bid is :$",auctionItems[toBidOn-1][4])
+        bid = float(input("How much would you like to bid?"))
+        #Test if new bid is greater than the current bid
+        if bid > auctionItems[toBidOn-1][4]:
+            #if the bid is greater than the current bid accept bid and swap the current bid value.
+            tempBidID = int(input(print("Your bid is acceptable, what is your bidder identification number?")))
+            auctionItems[toBidOn-1][4] = bid
+            #Append all bidder details to auctionItems ie. [001,"Charles"]
+            #THIS PART DEALS WITH FIRST ASSIGNMENT OF BIDDER DETAILS TO AUCTIONITEMSARRAY
+            #It tests the length of the auction Items array
+            #If it is 5 in length, it means a bid has not been placed on the item 
+            #as it does not have an appended bidder within auctionItems
+            if len(auctionItems[toBidOn-1]) == 5:
+                auctionItems[toBidOn-1].append(bidderDetails[tempBidID-1])
+                #No of bids is stored in the 3rd index of the auctionItems array.
+                print("DELETE ME:The current number of bids is before first assignment", auctionItems[toBidOn-1][3])
+            
+                auctionItems[toBidOn-1][3] += 1
 
-            print("DELETE ME:The current number of bids is after first assignment", auctionItems[toBidOn-1][3])
-        #THIS PART DEALS WITH SECOND AND FURTHER ASSIGNMENTS OF BIDDER DETAILS TO AUCTIONITEMSARRAY
-        #i.e. if a bidder is already appended to auctionItems, it will replace the bidder should the bid
-        #be higher
+                print("DELETE ME:The current number of bids is after first assignment", auctionItems[toBidOn-1][3])
+            #THIS PART DEALS WITH SECOND AND FURTHER ASSIGNMENTS OF BIDDER DETAILS TO AUCTIONITEMSARRAY
+            #i.e. if a bidder is already appended to auctionItems, it will replace the bidder should the bid
+            #be higher
+            else:
+                print("Im in the swap part")
+                auctionItems[toBidOn-1][5] = (bidderDetails[tempBidID-1])
+                ######NEED TO INCREASE THE ITEM BIDS +1#########
+                #No of bids is stored in the 3rd index of the auctionItems array.
+                print("DELETE ME:The current number of bids is before further assignment", auctionItems[toBidOn-1][3])
+            
+                auctionItems[toBidOn-1][3] += 1
+
+                print("DELETE ME:The current number of bids is after further assignment", auctionItems[toBidOn-1][3])
+
         else:
-            print("Im in the swap part")
-            auctionItems[toBidOn-1][5] = (bidderDetails[tempBidID-1])
-            ######NEED TO INCREASE THE ITEM BIDS +1#########
-            #No of bids is stored in the 3rd index of the auctionItems array.
-            print("DELETE ME:The current number of bids is before further assignment", auctionItems[toBidOn-1][3])
-        
-            auctionItems[toBidOn-1][3] += 1
-
-            print("DELETE ME:The current number of bids is after further assignment", auctionItems[toBidOn-1][3])
-
+            print("Your bid must be higher than the current highest bid")
     else:
-        print("Your bid must be higher than the current highest bid")
+        print("THAT IS IT FOR TODAY FOLKS - NOW TO WORK OUT THE NUMBERS")
+        auctionRunning = False
+
+#########TASK 3###########
+#Search through arrays and mark items as sold
+#To do this, I will append a further indexed item within the auction items
+#It will be a boolean - True or False
+
+print("WE ARE NOW READY FOR TASK 3")
+for i in range(len(auctionItems)):
+    if auctionItems[i][2] > auctionItems[i][4]:
+        auctionItems[i].append(False)
+    else:
+        auctionItems[i].append(True)
+
+print(auctionItems)
+
+#Search through arrays and if sold indicator is True
+#append 10% of the sold price to the auctionItems array
+
+for i in range(len(auctionItems)):
+    if auctionItems[i][6] == True:
+        auctionItems[i].append(auctionItems[i][4]*.1)
+
+print(auctionItems)

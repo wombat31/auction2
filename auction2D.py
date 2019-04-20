@@ -45,6 +45,8 @@ bidderCounter = 0
 numberAuctionItems = int(input("How many items are in the Auction?"))
 auctionRunning = True
 noBidCounter = 0 #For counting no bid items
+unsoldItems = 0
+biddingRounds = 0
 
 while counter < numberAuctionItems:
     #create item array
@@ -135,6 +137,7 @@ while auctionRunning:
             print("Your bid must be higher than the current highest bid")
     else:
         print("THAT IS IT FOR TODAY FOLKS - NOW TO WORK OUT THE NUMBERS")
+        biddingRounds += 1
         auctionRunning = False
 
 #########TASK 3###########
@@ -142,41 +145,53 @@ while auctionRunning:
 #To do this, I will append a further indexed item within the auction items
 #It will be a boolean - True or False
 
-print("WE ARE NOW READY FOR TASK 3")
-for i in range(len(auctionItems)):
-    if auctionItems[i][2] > auctionItems[i][4]:
-        auctionItems[i].append(False)
+
+if biddingRounds> 1:
+    print("WE ARE NOW READY FOR TASK 3")
+    for i in range(len(auctionItems)):
+        if auctionItems[i][2] > auctionItems[i][4]:
+            auctionItems[i].append(False)
+        else:
+            auctionItems[i].append(True)
+
+    print(auctionItems)
+
+    #Search through arrays and if sold indicator is True
+    #append 10% of the sold price to the auctionItems array
+
+
+    for i in range(len(auctionItems)):
+        if auctionItems[i][6] == True:
+            auctionItems[i].append(auctionItems[i][4]*.1)#This will append the fee for sold auctions
+
+    print(auctionItems)
+
+    #Print out the fees for sold auctions
+    print("HOUSE FEES FOR SOLD ITEMS")
+    for i in range(len(auctionItems)):
+        if auctionItems[i][6] == True:
+            print("The fee for sold item No: ", auctionItems[i][0], " Description: ", auctionItems[i][1], " is : $", auctionItems[i][7])
+            
+        else:
+            unsoldItems += 1
+    if unsoldItems == 0:
+        print("All Items were sold at today's auction")
     else:
-        auctionItems[i].append(True)
+        print("There were ", unsoldItems, " at todays's auction")
 
-print(auctionItems)
+    #Print out the final bid for all items that have not met their reserve price
+    print("ITEMS THAT DID NOT MEET THEIR RESERVE PRICE")
+    for i in range(len(auctionItems)):
+        if auctionItems[i][6] == False:
+            print("The final bid for item No: ", auctionItems[i][0], "Description: ", auctionItems[i][1], "was : $", auctionItems[i][4], " RESERVE PRICE NOT MET! - UNSOLD")
 
-#Search through arrays and if sold indicator is True
-#append 10% of the sold price to the auctionItems array
+    #Print out how many items received no bids ####THIS BIT NEEDS FINISHING
+    for i in range(len(auctionItems)):
+        if auctionItems[i][3] == 0:
+            noBidCounter += 1
+            #ADD IN APPEND TO TEMP ARRAY
+    print("The total number of items that recieved no bids is ", noBidCounter)
 
-for i in range(len(auctionItems)):
-    if auctionItems[i][6] == True:
-        auctionItems[i].append(auctionItems[i][4]*.1)#This will append the fee for sold auctions
-
-print(auctionItems)
-
-#Print out the fees for sold auctions
-print("HOUSE FEES FOR SOLD ITEMS")
-for i in range(len(auctionItems)):
-    if auctionItems[i][6] == True:
-        print("The fee for sold item No: ", auctionItems[i][0], " Description: ", auctionItems[i][1], " is : $", auctionItems[i][7])
-    else:
-        print("There were no items sold at today's auction!")
-
-#Print out the final bid for all items that have not met their reserve price
-print("ITEMS THAT DID NOT MEET THEIR RESERVE PRICE")
-for i in range(len(auctionItems)):
-    if auctionItems[i][6] == False:
-        print("The final bid for item No: ", auctionItems[i][0], "Description: ", auctionItems[i][1], "was : $", auctionItems[i][4], " RESERVE PRICE NOT MET! - UNSOLD")
-
-#Print out how many items received no bids ####THIS BIT NEEDS FINISHING
-for i in range(len(auctionItems)):
-    if auctionItems[i][3] == 0:
-        noBidCounter += 1
-        #ADD IN APPEND TO TEMP ARRAY
-print("The total number of items that recieved no bids is ", noBidCounter)
+else:
+    if biddingRounds ==1:
+        print("Today's auction was aborted without a bid taking place")
